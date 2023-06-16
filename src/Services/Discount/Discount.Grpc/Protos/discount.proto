@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+option csharp_namespace = "Discount.Grpc.Protos";
+
+//don't forget to change its build action to protobuf compiler on properties 
+//and grpc stub classes to server only
+
+//it creates Discount.cs under obj->Debug->net7.0->Protos as build the project
+//(you must click the show all files button on solution explorer to see obj folder)
+service DiscountProtoService {
+	//defines a method that takes an parameter for coupon and return a coupon
+	//for getdiscount, it takes a string parameter and return a coupon related to its parameter
+	rpc GetDiscount (GetDiscountRequest) returns (CouponModel);
+
+	rpc CreateDiscount (CreateDiscountRequest) returns (CouponModel);
+
+	rpc UpdateDiscount (UpdateDiscountRequest) returns (CouponModel);
+
+	rpc DeleteDiscount (DeleteDiscountRequest) returns (DeleteDiscountResponse);
+}
+
+message GetDiscountRequest{
+	string productName = 1;
+}
+
+message CouponModel{
+	int32 id = 1;
+	string productName = 2;
+	string description = 3;
+	int32 amount = 4;
+}
+
+message CreateDiscountRequest{
+	CouponModel coupon = 1;
+}
+
+message UpdateDiscountRequest{
+	CouponModel coupon = 1;
+}
+
+message DeleteDiscountRequest{
+	string productName = 1;
+}
+
+message DeleteDiscountResponse{
+	bool success = 1;
+}
+
+
+
