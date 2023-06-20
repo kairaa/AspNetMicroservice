@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ValidationException = Ordering.Application.Exceptions.ValidationException;
 
 namespace Ordering.Application.Behaviours
 {
@@ -34,7 +35,7 @@ namespace Ordering.Application.Behaviours
                 //if there is failure, throw error
                 if(failures.Count > 0)
                 {
-                    throw new Ordering.Application.Exceptions.ValidationException(failures);
+                    throw new ValidationException(failures);
                 }
             }
             //continue to request pipeline
